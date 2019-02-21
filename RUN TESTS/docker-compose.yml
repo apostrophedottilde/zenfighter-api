@@ -1,0 +1,25 @@
+version: '3'
+services:
+  zenfighter:
+    build: ..
+    ports:
+    - 8000:8000
+    volumes:
+    - ..:/app
+    links:
+    - mysqldb_test
+    environment:
+      dbHost: "mysqldb_test"
+      dbPort: "3307"
+      dbName: "zenfightertest"
+      dbUser: "newguy"
+      dbPass: "password123"
+  mysqldb_test:
+    build: .
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: zenfightertest
+      MYSQL_USER: newguy
+      MYSQL_PASSWORD: password123
